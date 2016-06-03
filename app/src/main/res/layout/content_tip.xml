@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/edt_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="@string/hint_total"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/edt_total"
+        android:layout_toRightOf="@+id/edt_total"
+        android:text="@string/btn_calcular" />
+
+    <EditText
+        android:id="@+id/edt_tip_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_submit"
+        android:hint="@string/tip_percentage"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <Button
+        style="?android:buttonStyleSmall"
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_submit"
+        android:layout_alignStart="@+id/btn_submit"
+        android:layout_below="@+id/btn_submit"
+        android:layout_toRightOf="@+id/edt_tip_percentage"
+        android:text="@string/btn_add" />
+
+    <Button
+        style="?android:buttonStyleSmall"
+        android:id="@+id/btn_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_remove"
+        android:layout_below="@+id/btn_submit"
+        android:layout_toRightOf="@+id/btn_add"
+        android:layout_toEndOf="@+id/btn_add" />
+
+    <Button
+        android:id="@+id/btn_delete_recent"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_add"
+        android:text="@string/btn_delete_recent" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignRight="@+id/btn_submit"
+
+        android:layout_below="@+id/btn_delete_recent"
+        android:background="@android:color/darker_gray" />
+
+</RelativeLayout>

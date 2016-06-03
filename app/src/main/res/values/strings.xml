@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TipCalc</string>
+    <string name="hint_total">Total</string>
+    <string name="btn_calcular">Calcular</string>
+    <string name="btn_add">+</string>
+    <string name="btn_remove">-</string>
+    <string name="btn_delete_recent">Borrar recientes</string>
+    <string name="tip_percentage">% de propina</string>
 </resources>
