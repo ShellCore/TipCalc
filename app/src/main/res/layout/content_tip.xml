@@ -34,7 +34,7 @@
         android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_increase"
         style="?android:buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,16 +42,17 @@
         android:layout_alignStart="@+id/btn_calculate"
         android:layout_below="@+id/btn_calculate"
         android:layout_toRightOf="@+id/edt_tip_percentage"
+        android:layout_toEndOf="@+id/edt_tip_percentage"
         android:text="@string/btn_add" />
 
     <Button
-        android:id="@+id/btn_remove"
+        android:id="@+id/btn_decrease"
         style="?android:buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_calculate"
-        android:layout_toEndOf="@+id/btn_add"
-        android:layout_toRightOf="@+id/btn_add"
+        android:layout_toEndOf="@+id/btn_increase"
+        android:layout_toRightOf="@+id/btn_increase"
         android:text="@string/btn_remove" />
 
     <Button
@@ -61,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/btn_add"
+        android:layout_below="@+id/btn_increase"
         android:text="@string/btn_delete_recent" />
 
     <View
@@ -69,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_alignRight="@+id/btn_calculate"
-
+        android:layout_alignEnd="@+id/btn_calculate"
         android:layout_below="@+id/btn_delete_recent"
         android:background="@android:color/darker_gray" />
 
@@ -78,6 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/separator"
+        android:hint="@string/propina"
         android:visibility="gone" />
 
 </RelativeLayout>

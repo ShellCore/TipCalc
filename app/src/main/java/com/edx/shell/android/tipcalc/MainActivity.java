@@ -17,11 +17,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Constantes
     private static final int DEFAULT_TIP_PERCENTAGE = 10;
+    private static final int TIP_STEP_CHANGE = 1;
 
     // Components
     private EditText edtTotal;
-    private Button btnCalculate;
     private EditText edtPropina;
+    private EditText edtPorcentaje;
+    private Button btnCalculate;
+    private Button btnIncrease;
+    private Button btnDecrease;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +56,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initializeComponents() {
         edtTotal = (EditText) findViewById(R.id.edt_total);
-        btnCalculate = (Button) findViewById(R.id.btn_calculate);
         edtPropina = (EditText) findViewById(R.id.edt_propina);
+        edtPorcentaje = (EditText) findViewById(R.id.edt_tip_percentage);
+
+        btnCalculate = (Button) findViewById(R.id.btn_calculate);
+        btnIncrease = (Button) findViewById(R.id.btn_increase);
+        btnDecrease = (Button) findViewById(R.id.btn_decrease);
     }
 
     private void setonClickListeners() {
         btnCalculate.setOnClickListener(this);
+        btnIncrease.setOnClickListener(this);
+        btnDecrease.setOnClickListener(this);
     }
 
     @Override
@@ -67,8 +77,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 hideKeyboard();
                 calculateTip();
                 break;
+            case R.id.btn_increase:
+                hideKeyboard();
+                cambiarCambioPropina(TIP_STEP_CHANGE);
+                break;
+            case R.id.btn_decrease:
+                hideKeyboard();
+                cambiarCambioPropina(-TIP_STEP_CHANGE);
+                break;
             default:
                 break;
+        }
+    }
+
+    private void cambiarCambioPropina(int change) {
+        int porcentaje = obtenerPorcentajePropina();
+        porcentaje += change;
+        if (porcentaje > 0) {
+            edtPorcentaje.setText(String.valueOf(porcentaje));
         }
     }
 
@@ -89,7 +115,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private int obtenerPorcentajePropina() {
-        return DEFAULT_TIP_PERCENTAGE;
+        int porcentaje = DEFAULT_TIP_PERCENTAGE;
+        String strPorcentaje = edtPorcentaje.getText().toString().trim();
+        if (!strPorcentaje.isEmpty()) {
+            porcentaje = Integer.parseInt(strPorcentaje);
+        } else {
+            edtPorcentaje.setText(String.valueOf(porcentaje));
+        }
+        return porcentaje;
     }
 
     /**
@@ -98,7 +131,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void hideKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         try {
-            inputMethodManager.hideSoftInputFromInputMethod(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            if (getCurrentFocus() != null) {
+                inputMethodManager.hideSoftInputFromInputMethod(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
         } catch (NullPointerException e) {
             Log.e(getLocalClassName(), Log.getStackTraceString(e));
         }
