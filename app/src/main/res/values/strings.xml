@@ -7,4 +7,6 @@
     <string name="btn_delete_recent">Borrar recientes</string>
     <string name="tip_percentage">% de propina</string>
     <string name="act_about">Acerca de</string>
+
+    <string name="propina">Propina %,.1f</string>
 </resources>

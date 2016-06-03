@@ -10,9 +10,8 @@
     tools:context="com.edx.shell.android.tipcalc.MainActivity">
 
     <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/tip_content"
         layout="@layout/content_tip"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

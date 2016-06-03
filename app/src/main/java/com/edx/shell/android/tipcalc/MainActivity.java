@@ -11,11 +11,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    // Constantes
+    private static final int DEFAULT_TIP_PERCENTAGE = 10;
+
     // Components
+    private EditText edtTotal;
     private Button btnCalculate;
+    private EditText edtPropina;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeComponents() {
+        edtTotal = (EditText) findViewById(R.id.edt_total);
         btnCalculate = (Button) findViewById(R.id.btn_calculate);
+        edtPropina = (EditText) findViewById(R.id.edt_propina);
     }
 
     private void setonClickListeners() {
@@ -56,12 +64,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_calculate:
-                Log.d(getLocalClassName(), "Click en calcular");
                 hideKeyboard();
+                calculateTip();
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * Función para calcular el valor de la propina, de acuerdo al total capturado
+     */
+    private void calculateTip() {
+        String strTotal = edtTotal.getText().toString().trim();
+        if (!strTotal.isEmpty()) {
+            double total = Double.parseDouble(strTotal);
+            int porcentaje = obtenerPorcentajePropina();
+            double propina = total * (porcentaje / 100d);
+
+            String strPorcentaje = String.format(getString(R.string.propina), propina);
+            edtPropina.setVisibility(View.VISIBLE);
+            edtPropina.setText(strPorcentaje);
+        }
+    }
+
+    private int obtenerPorcentajePropina() {
+        return DEFAULT_TIP_PERCENTAGE;
     }
 
     /**

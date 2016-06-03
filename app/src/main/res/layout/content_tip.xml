@@ -29,13 +29,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/btn_calculate"
-        android:hint="@string/tip_percentage"
         android:ems="10"
+        android:hint="@string/tip_percentage"
         android:inputType="numberDecimal" />
 
     <Button
-        style="?android:buttonStyleSmall"
         android:id="@+id/btn_add"
+        style="?android:buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btn_calculate"
@@ -45,14 +45,14 @@
         android:text="@string/btn_add" />
 
     <Button
-        style="?android:buttonStyleSmall"
         android:id="@+id/btn_remove"
+        style="?android:buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_remove"
         android:layout_below="@+id/btn_calculate"
+        android:layout_toEndOf="@+id/btn_add"
         android:layout_toRightOf="@+id/btn_add"
-        android:layout_toEndOf="@+id/btn_add" />
+        android:text="@string/btn_remove" />
 
     <Button
         android:id="@+id/btn_delete_recent"
@@ -72,5 +72,12 @@
 
         android:layout_below="@+id/btn_delete_recent"
         android:background="@android:color/darker_gray" />
+
+    <EditText
+        android:id="@+id/edt_propina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator"
+        android:visibility="gone" />
 
 </RelativeLayout>
