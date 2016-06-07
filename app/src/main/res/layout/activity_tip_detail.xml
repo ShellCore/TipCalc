@@ -10,7 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.edx.shell.android.tipcalc.activities.TipDetailActivity">
 
-
     <TextView
         android:id="@+id/txt_total"
         android:layout_width="wrap_content"
