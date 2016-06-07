@@ -1,6 +1,7 @@
 package com.edx.shell.android.tipcalc.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.edx.shell.android.tipcalc.R;
+import com.edx.shell.android.tipcalc.activities.TipDetailActivity;
 import com.edx.shell.android.tipcalc.adapters.TipAdapter;
 import com.edx.shell.android.tipcalc.listeners.OnItemClickListener;
 import com.edx.shell.android.tipcalc.listeners.TipHistoryListFragmentListener;
@@ -63,7 +65,10 @@ public class TipHistoryListFragment extends Fragment implements TipHistoryListFr
 
     @Override
     public void onItemClick(TipRecord tipRecord) {
-        Toast.makeText(getActivity(), tipRecord.getDateFormatted(), Toast.LENGTH_SHORT)
-                .show();
+        Intent intent = new Intent(getActivity(), TipDetailActivity.class);
+        intent.putExtra(TipDetailActivity.TOTAL_KEY, tipRecord.getBill());
+        intent.putExtra(TipDetailActivity.TIP_KEY, tipRecord.getTip());
+        intent.putExtra(TipDetailActivity.TIMESTAMP_KEY, tipRecord.getDateFormatted());
+        startActivity(intent);
     }
 }
