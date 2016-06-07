@@ -12,11 +12,13 @@ import android.widget.Toast;
 
 import com.edx.shell.android.tipcalc.R;
 import com.edx.shell.android.tipcalc.adapters.TipAdapter;
+import com.edx.shell.android.tipcalc.listeners.OnItemClickListener;
+import com.edx.shell.android.tipcalc.listeners.TipHistoryListFragmentListener;
 import com.edx.shell.android.tipcalc.models.TipRecord;
 
 import java.util.ArrayList;
 
-public class TipHistoryListFragment extends Fragment implements TipHistoryListFragmentListener {
+public class TipHistoryListFragment extends Fragment implements TipHistoryListFragmentListener, OnItemClickListener {
 
     // Adaptadores
     private TipAdapter adapter;
@@ -40,7 +42,7 @@ public class TipHistoryListFragment extends Fragment implements TipHistoryListFr
 
     private void initAdapter() {
         if (adapter == null) {
-            adapter = new TipAdapter(getActivity().getApplicationContext(), new ArrayList<TipRecord>());
+            adapter = new TipAdapter(getActivity().getApplicationContext(), this);
         }
     }
 
@@ -57,5 +59,11 @@ public class TipHistoryListFragment extends Fragment implements TipHistoryListFr
     @Override
     public void clearList() {
         adapter.clear();
+    }
+
+    @Override
+    public void onItemClick(TipRecord tipRecord) {
+        Toast.makeText(getActivity(), tipRecord.getDateFormatted(), Toast.LENGTH_SHORT)
+                .show();
     }
 }

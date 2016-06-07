@@ -1,4 +1,4 @@
-package com.edx.shell.android.tipcalc.fragments;
+package com.edx.shell.android.tipcalc.listeners;
 
 import com.edx.shell.android.tipcalc.models.TipRecord;
 

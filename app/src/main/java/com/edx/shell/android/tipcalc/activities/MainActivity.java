@@ -16,7 +16,7 @@ import android.widget.EditText;
 import com.edx.shell.android.tipcalc.R;
 import com.edx.shell.android.tipcalc.TipCalcApp;
 import com.edx.shell.android.tipcalc.fragments.TipHistoryListFragment;
-import com.edx.shell.android.tipcalc.fragments.TipHistoryListFragmentListener;
+import com.edx.shell.android.tipcalc.listeners.TipHistoryListFragmentListener;
 import com.edx.shell.android.tipcalc.models.TipRecord;
 
 import java.util.Date;

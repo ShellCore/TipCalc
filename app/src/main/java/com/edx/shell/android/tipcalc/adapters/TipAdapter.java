@@ -8,18 +8,28 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.edx.shell.android.tipcalc.R;
+import com.edx.shell.android.tipcalc.listeners.OnItemClickListener;
 import com.edx.shell.android.tipcalc.models.TipRecord;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
 
-    private List<TipRecord> recordList;
     private Context context;
+    private List<TipRecord> recordList;
+    private OnItemClickListener onItemClickListener;
 
-    public TipAdapter(Context context, List<TipRecord> recordList) {
+    public TipAdapter(Context context, List<TipRecord> recordList, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.recordList = recordList;
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public TipAdapter(Context context, OnItemClickListener onItemClickListener) {
+        this.context = context;
+        this.recordList = new ArrayList<TipRecord>();
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -34,6 +44,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
         TipRecord element = recordList.get(position);
         String strTip = String.format(context.getString(R.string.propina), element.getTip());
         holder.txtContent.setText(strTip);
+        holder.setOnItemClickListener(element, onItemClickListener);
     }
 
     @Override
@@ -58,6 +69,15 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             txtContent = (TextView) itemView.findViewById(R.id.txt_content);
+        }
+
+        public void setOnItemClickListener(final TipRecord element, final OnItemClickListener onItemClickListener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(element);
+                }
+            });
         }
     }
 }
