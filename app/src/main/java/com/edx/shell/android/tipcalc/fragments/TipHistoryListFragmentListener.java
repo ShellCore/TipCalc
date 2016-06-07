@@ -1,5 +1,8 @@
 package com.edx.shell.android.tipcalc.fragments;
 
+import com.edx.shell.android.tipcalc.models.TipRecord;
+
 public interface TipHistoryListFragmentListener {
-    void action(String string);
+    void addToList(TipRecord record);
+    void clearList();
 }

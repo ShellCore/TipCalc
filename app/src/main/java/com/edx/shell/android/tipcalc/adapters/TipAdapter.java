@@ -32,7 +32,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         TipRecord element = recordList.get(position);
-        String strTip = String.format(context.getString(R.string.propina), element.getBill());
+        String strTip = String.format(context.getString(R.string.propina), element.getTip());
         holder.txtContent.setText(strTip);
     }
 
