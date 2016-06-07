@@ -1,10 +1,10 @@
-package com.edx.shell.android.tipcalc;
+package com.edx.shell.android.tipcalc.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +13,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.edx.shell.android.tipcalc.R;
+import com.edx.shell.android.tipcalc.TipCalcApp;
+import com.edx.shell.android.tipcalc.fragments.TipHistoryListFragment;
+import com.edx.shell.android.tipcalc.listeners.TipHistoryListFragmentListener;
+import com.edx.shell.android.tipcalc.models.TipRecord;
+
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    // Variables
+    private TipHistoryListFragmentListener fragmentListener;
 
     // Constantes
     private static final int DEFAULT_TIP_PERCENTAGE = 10;
@@ -26,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnCalculate;
     private Button btnIncrease;
     private Button btnDecrease;
+    private Button btnClear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +74,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnCalculate = (Button) findViewById(R.id.btn_calculate);
         btnIncrease = (Button) findViewById(R.id.btn_increase);
         btnDecrease = (Button) findViewById(R.id.btn_decrease);
+        btnClear = (Button) findViewById(R.id.btn_clear);
+
+        TipHistoryListFragment fragment = (TipHistoryListFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.frg_list);
+        fragment.setRetainInstance(true);
+        fragmentListener = fragment;
     }
 
     private void setonClickListeners() {
         btnCalculate.setOnClickListener(this);
         btnIncrease.setOnClickListener(this);
         btnDecrease.setOnClickListener(this);
+        btnClear.setOnClickListener(this);
     }
 
     @Override
@@ -85,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 hideKeyboard();
                 cambiarCambioPropina(-TIP_STEP_CHANGE);
                 break;
+            case R.id.btn_clear:
+                hideKeyboard();
+                fragmentListener.clearList();
             default:
                 break;
         }
@@ -106,9 +128,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!strTotal.isEmpty()) {
             double total = Double.parseDouble(strTotal);
             int porcentaje = obtenerPorcentajePropina();
-            double propina = total * (porcentaje / 100d);
 
-            String strPorcentaje = String.format(getString(R.string.propina), propina);
+            TipRecord tipRecord = new TipRecord(total, porcentaje, new Date());
+
+            String strPorcentaje = String.format(getString(R.string.propina), tipRecord.getTip());
+            fragmentListener.addToList(tipRecord);
             edtPropina.setVisibility(View.VISIBLE);
             edtPropina.setText(strPorcentaje);
         }
