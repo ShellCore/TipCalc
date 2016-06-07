@@ -1,4 +1,4 @@
-package com.edx.shell.android.tipcalc;
+package com.edx.shell.android.tipcalc.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.edx.shell.android.tipcalc.R;
+import com.edx.shell.android.tipcalc.TipCalcApp;
+import com.edx.shell.android.tipcalc.fragments.TipHistoryListFragment;
+import com.edx.shell.android.tipcalc.fragments.TipHistoryListFragmentListener;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    // Variables
+    private TipHistoryListFragmentListener fragmentListener;
 
     // Constantes
     private static final int DEFAULT_TIP_PERCENTAGE = 10;
@@ -62,6 +70,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnCalculate = (Button) findViewById(R.id.btn_calculate);
         btnIncrease = (Button) findViewById(R.id.btn_increase);
         btnDecrease = (Button) findViewById(R.id.btn_decrease);
+
+        TipHistoryListFragment fragment = (TipHistoryListFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.frg_list);
+        fragment.setRetainInstance(true);
+        fragmentListener = fragment;
     }
 
     private void setonClickListeners() {
@@ -109,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             double propina = total * (porcentaje / 100d);
 
             String strPorcentaje = String.format(getString(R.string.propina), propina);
+            fragmentListener.action(strPorcentaje);
             edtPropina.setVisibility(View.VISIBLE);
             edtPropina.setText(strPorcentaje);
         }
